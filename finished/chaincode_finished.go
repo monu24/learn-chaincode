@@ -36,6 +36,22 @@ func main() {
 		fmt.Printf("Error starting Simple chaincode: %s", err)
 	}
 	// command line flags
+	
+	
+	
+	
+}
+
+// Init resets all the things
+func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	if len(args) != 1 {
+		return nil, errors.New("Incorrect number of arguments. Expecting 1")
+	}
+
+	err := stub.PutState("hello_world", []byte(args[0]))
+	if err != nil {
+		return nil, err
+	}
 	port := flag.Int("port", 80, "port to serve on")
 	dir := flag.String("directory", "web/", "directory of web files")
 	flag.Parse()
@@ -52,21 +68,6 @@ func main() {
 	err = http.ListenAndServe(addr, nil)
 	
 	fmt.Println(err.Error())
-	
-	
-	
-}
-
-// Init resets all the things
-func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	if len(args) != 1 {
-		return nil, errors.New("Incorrect number of arguments. Expecting 1")
-	}
-
-	err := stub.PutState("hello_world", []byte(args[0]))
-	if err != nil {
-		return nil, err
-	}
 
 	return nil, nil
 }
