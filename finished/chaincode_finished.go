@@ -36,7 +36,6 @@ func main() {
 		fmt.Printf("Error starting Simple chaincode: %s", err)
 	}
 	// command line flags
-	var err error
 	port := flag.Int("port", 80, "port to serve on")
 	dir := flag.String("directory", "web/", "directory of web files")
 	flag.Parse()
@@ -51,6 +50,9 @@ func main() {
 	addr := fmt.Sprintf("127.0.0.1:%d", *port)
 	// this call blocks -- the progam runs here forever
 	err := http.ListenAndServe(addr, nil)
+	if err != nil {
+		return nil, err
+	}
 	fmt.Println(err.Error())
 	
 	
