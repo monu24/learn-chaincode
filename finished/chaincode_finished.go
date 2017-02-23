@@ -5,9 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"flag"
-	"log"
-	"net/http"
+	
 	
 )
 
